@@ -12,6 +12,10 @@ RUN apt-get update -q && apt-get install language-pack-de-base -qy
 ENV LANG=de_DE.UTF-8 LANGUAGE=de_DE:de LC_ALL=de_DE.UTF-8
 RUN update-locale && locale-gen de_DE.UTF-8
 
+# Create Snyology NAS /volume1 folder 
+# to easily provide the same corresponding host directory at SickRage
+RUN mkdir /volume1
+
 # Create SickRage folder structure
 RUN mkdir -p /$SR_HOME/app && \
     mkdir -p /$SR_HOME/config && \
