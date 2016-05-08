@@ -33,7 +33,7 @@ ADD ./start.sh /$SR_HOME/start.sh
 RUN chmod u+x  /$SR_HOME/start.sh
 
 # Set volumes for the SickRage folder structure
-VOLUME ["/sickrage/config", "/sickrage/data"]
+VOLUME ["/sickrage/config", "/sickrage/data", "/volume1"]
 
 # Expose ports
 EXPOSE 8081
