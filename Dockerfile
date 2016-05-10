@@ -26,7 +26,10 @@ RUN mkdir -p $SR_HOME/app && \
 WORKDIR $SR_HOME/app
 
 # Install the packages required for SickRage
-RUN apt-get install $APTLIST -qy && apt-get clean -y
+RUN apt-get install $APTLIST -qy
+
+# Clean up APT when done.
+RUN apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 #start.sh will download the latest version of SickRage and run it.
 ADD ./config.sh $SR_HOME/config.sh

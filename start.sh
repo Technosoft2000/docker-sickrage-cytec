@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #run the default config script
-bash $SR_HOME/config.sh
+source $SR_HOME/config.sh
 
 #chown the SickRage directory by the new user
 chown $PUSER:$PGROUP -R $SR_HOME
