@@ -10,7 +10,7 @@ docker create --name=sickrage-cytec \
 -v <data directory>:/sickrage/data \
 -v <tv downloads directory>:/volume1/downloads \
 -v <tv series directory>:/volume1/video \
-[-v /volume1/certificates:/volume1/certificates:ro \]
+[-v /volume1/certificates:/volume1/certificates \]
 [-v /etc/localtime:/etc/localtime:ro \]
 [-e PGID=<group ID (gid)> -e PUID=<user ID (uid)> \]
 -p <HTTP port>:8081 \

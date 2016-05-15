@@ -6,7 +6,7 @@ ENV SR_HOME=/sickrage
 ENV SYNO_VOLUME=/volume1
 
 # Set the needed applications
-ENV APTLIST="git-core python python-cheetah"
+ENV APTLIST="git-core python python-cheetah python-openssl"
 
 # Set the locale
 RUN apt-get update -q && apt-get install language-pack-de-base -qy
