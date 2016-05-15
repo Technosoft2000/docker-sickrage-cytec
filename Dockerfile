@@ -16,7 +16,8 @@ RUN update-locale && locale-gen de_DE.UTF-8
 # Create Snyology NAS /volume1 folders 
 # to easily provide the same corresponding host directories at SickRage
 RUN mkdir -p $SYNO_VOLUME/downloads && \
-    mkdir -p $SYNO_VOLUME/video
+    mkdir -p $SYNO_VOLUME/video && \
+    mkdir -p $SYNO_VOLUME/certificates
 
 # Create SickRage folder structure
 RUN mkdir -p $SR_HOME/app && \
@@ -38,7 +39,7 @@ ADD ./start.sh $SR_HOME/start.sh
 RUN chmod u+x  $SR_HOME/start.sh
 
 # Set volumes for the SickRage folder structure
-VOLUME ["/sickrage/config", "/sickrage/data", "/volume1/downloads", "/volume1/video"]
+VOLUME ["/sickrage/config", "/sickrage/data", "/volume1/downloads", "/volume1/video", "/volume1/certificates"]
 
 # Expose ports
 EXPOSE 8081

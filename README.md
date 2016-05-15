@@ -10,6 +10,7 @@ docker create --name=sickrage-cytec \
 -v <data directory>:/sickrage/data \
 -v <tv downloads directory>:/volume1/downloads \
 -v <tv series directory>:/volume1/video \
+[-v /volume1/certificates:/volume1/certificates:ro \]
 [-v /etc/localtime:/etc/localtime:ro \]
 [-e PGID=<group ID (gid)> -e PUID=<user ID (uid)> \]
 -p <HTTP port>:8081 \
@@ -39,6 +40,7 @@ docker start sickrage-cytec
 * -v /sickrage/data - local path for sickrage data files (cache, database, ...)
 * -v /volume1/downloads - the folder where your download client puts the completed TV downloads
 * -v /volume1/video - the target folder where the tv series will be placed
+* -v /volume1/certificates - the target folder of the SSL/TLS certificate files
 * -v /etc/localhost for timesync - __optional__
 * -e PGID for GroupID - see below for explanation - __optional__
 * -e PUID for UserID - see below for explanation - __optional__
