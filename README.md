@@ -1,5 +1,6 @@
 # SickRage
 ![](https://sickrage.github.io/images/logo.png)
+
 SickRage is an automatic Video Library Manager for TV Shows.
 It watches for new episodes of your favorite shows, and when they are posted it does its magic: automatic torrent/nzb searching, downloading, and processing at the qualities you want.
 
@@ -194,4 +195,3 @@ ons/exceptions.txt
 21:31:05 INFO::MAIN :: Building internal name cache for all shows
 21:31:05 INFO::MAIN :: Updating timezone info with new one: zoneinfo-2015g.tar.gz
 ```
-
