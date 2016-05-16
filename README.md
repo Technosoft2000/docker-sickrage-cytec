@@ -1,5 +1,11 @@
-# docker-sickrage-cytec
-Docker image for SickRage-cytec fork, based on docker image of Ubuntu 16.04
+# SickRage
+![](https://sickrage.github.io/images/logo.png)
+SickRage is an automatic Video Library Manager for TV Shows.
+It watches for new episodes of your favorite shows, and when they are posted it does its magic: automatic torrent/nzb searching, downloading, and processing at the qualities you want.
+
+## Modifications on [SickRage](https://sickrage.github.io/) by cytec
+* fixes to detect German releases correctly
+* added special support for German Airdates
 
 ## Usage ##
 
