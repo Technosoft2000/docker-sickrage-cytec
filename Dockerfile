@@ -17,7 +17,7 @@ RUN update-locale && locale-gen de_DE.UTF-8
 # HINT: set this environment variable to true to set timezone on container startup
 ENV SET_CONTAINER_TIMEZONE false
 # Default container timezone as found under the directory /usr/share/zoneinfo/
-ENV CONTAINER_TIMEZONE localtime
+ENV CONTAINER_TIMEZONE UTC
 
 # Create Snyology NAS /volume1 folders 
 # to easily provide the same corresponding host directories at SickRage
@@ -52,5 +52,4 @@ EXPOSE 8081
 
 # Start SickRage-cytec
 CMD $SR_HOME/start.sh
-
 

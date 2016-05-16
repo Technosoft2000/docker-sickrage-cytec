@@ -71,11 +71,13 @@ In the case of the Synology NAS it is not possible to map `/etc/localtime` for t
 set `SET_CONTAINER_TIMEZONE` to `true` and specify with `CONTAINER_TIMEZONE` which timezone should be used.
 The possible container timezones can be found under the directory `/usr/share/zoneinfo/`.
 Examples:
-* localtime
-* UTC
+* UTC - __this is the default value if no value is set__
 * Europe\Berlin
 * Europe\Vienna
 * America\New_York
+* ...
+
+__Don't use the value__ `localtime` because it results into: `failed to access '/etc/localtime': Too many levels of symbolic links`
 
 ## User / Group Identifiers ##
 Sometimes when using data volumes (-v flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user PUID and group PGID. Ensure the data volume directory on the host is owned by the same user you specify and it will "just work" ™.
