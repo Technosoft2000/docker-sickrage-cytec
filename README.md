@@ -17,7 +17,7 @@ docker create --name=sickrage-cytec \
 -v <data directory>:/sickrage/data \
 -v <tv downloads directory>:/volume1/downloads \
 -v <tv series directory>:/volume1/video \
-[-v /volume1/certificates:/volume1/certificates \]
+[-v <path to certificates>:/volume1/certificates \]
 [-v /etc/localtime:/etc/localtime:ro \]
 [-e SET_CONTAINER_TIMEZONE=true \]
 [-e CONTAINER_TIMEZONE=<container timezone value> \]
