@@ -9,3 +9,6 @@ PGROUP=${PGROUP:=sickrage}
 addgroup --gid $PGID $PGROUP
 adduser --shell /bin/bash --no-create-home --uid $PUID --ingroup $PGROUP --disabled-password --gecos "" $PUSER
 
+#set the timezone
+source $SR_HOME/set_timezone.sh
+

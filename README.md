@@ -12,10 +12,13 @@ docker create --name=sickrage-cytec \
 -v <tv series directory>:/volume1/video \
 [-v /volume1/certificates:/volume1/certificates \]
 [-v /etc/localtime:/etc/localtime:ro \]
+[-e SET_CONTAINER_TIMEZONE=true \]
+[-e CONTAINER_TIMEZONE=<container timezone value> \]
 [-e PGID=<group ID (gid)> -e PUID=<user ID (uid)> \]
 -p <HTTP port>:8081 \
 technosoft2000/sickrage-cytec
 ```
+
 __Example:__
 ```
 docker create --name=sickrage-cytec \
@@ -29,21 +32,50 @@ docker create --name=sickrage-cytec \
 technosoft2000/sickrage-cytec
 ```
 
+*or*
+
+```
+docker create --name=sickrage-cytec \
+-v /opt/docker/sickrage/config:/sickrage/config \
+-v /opt/docker/sickrage/data:/sickrage/data \
+-v /volume1/downloads:/volume1/downloads \
+-v /volume1/video:/volume1/video \
+-e SET_CONTAINER_TIMEZONE=true \
+-e CONTAINER_TIMEZONE=Europe/Berlin \
+-e PGID=1001 -e PUID=1001 \
+-p 8081:8081 \
+technosoft2000/sickrage-cytec
+```
+
 __Start the container:__
 ```
 docker start sickrage-cytec
 ```
 
 ## Parameters ##
-* -p 8081 - http port for the web user interface
-* -v /sickrage/config - local path for sickrage config files
-* -v /sickrage/data - local path for sickrage data files (cache, database, ...)
-* -v /volume1/downloads - the folder where your download client puts the completed TV downloads
-* -v /volume1/video - the target folder where the tv series will be placed
-* -v /volume1/certificates - the target folder of the SSL/TLS certificate files
-* -v /etc/localhost for timesync - __optional__
-* -e PGID for GroupID - see below for explanation - __optional__
-* -e PUID for UserID - see below for explanation - __optional__
+* `-p 8081` - http port for the web user interface
+* `-v /sickrage/config` - local path for sickrage config files
+* `-v /sickrage/data` - local path for sickrage data files (cache, database, ...)
+* `-v /volume1/downloads` - the folder where your download client puts the completed TV downloads
+* `-v /volume1/video` - the target folder where the tv series will be placed
+* `-v /volume1/certificates` - the target folder of the SSL/TLS certificate files
+* `-v /etc/localhost` - for timesync - __optional__
+* `-e SET_CONTAINER_TIMEZONE` - set it to `true` if the specified `CONTAINER_TIMEZONE` should be used - __optional__ 
+* `-e CONTAINER_TIMEZONE` - container timezone as found under the directory `/usr/share/zoneinfo/` - __optional__
+* `-e PGID` for GroupID - see below for explanation - __optional__
+* `-e PUID` for UserID - see below for explanation - __optional__
+
+### Container Timezone
+
+In the case of the Synology NAS it is not possible to map `/etc/localtime` for timesync, and for this and similar case
+set `SET_CONTAINER_TIMEZONE` to `true` and specify with `CONTAINER_TIMEZONE` which timezone should be used.
+The possible container timezones can be found under the directory `/usr/share/zoneinfo/`.
+Examples:
+* localtime
+* UTC
+* Europe\Berlin
+* Europe\Vienna
+* America\New_York
 
 ## User / Group Identifiers ##
 Sometimes when using data volumes (-v flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user PUID and group PGID. Ensure the data volume directory on the host is owned by the same user you specify and it will "just work" ™.
@@ -101,14 +133,15 @@ uid=1029(docker) gid=100(users) groups=100(users),65539(docker)
 docker pull technosoft2000/sickrage-cytec
 ```
 
-* create a Docker container (take care regarding the user ID and group ID, change port if needed)
+* create a Docker container (take care regarding the user ID and group ID, change timezone and port as needed)
 ```
 docker create --name=sickrage-cytec \
 -v /volume1/docker/apps/sickrage/config:/sickrage/config \
 -v /volume1/docker/apps/sickrage/data:/sickrage/data \
 -v /volume1/downloads:/volume1/downloads \
 -v /volume1/video:/volume1/video \
--v /etc/localtime:/etc/localtime:ro \
+-e SET_CONTAINER_TIMEZONE=true \
+-e CONTAINER_TIMEZONE=Europe/Berlin \
 -e PGID=65539 -e PUID=1029 \
 -p 9091:8081 \
 technosoft2000/sickrage-cytec
@@ -135,7 +168,11 @@ Adding group 'sickrage' (GID 65539) ...
 Done.
 Adding user 'sickrage' ...
 Adding new user 'sickrage' (1029) with group 'sickrage' ...
-Not creating home directory '/home/sickrage'.
+Not creating home directory `/home/sickrage'.
+Current default time zone: 'Europe/Berlin'
+Local time is now:      Mon May 16 13:56:18 CEST 2016.
+Universal Time is now:  Mon May 16 11:56:18 UTC 2016.
+Container timezone set to: Europe/Berlin
 Klone nach '/sickrage/app' ...
 Already up-to-date.
 21:31:04 INFO::MAIN :: Checking for shows with tvrage id's, since tvrage is gone
