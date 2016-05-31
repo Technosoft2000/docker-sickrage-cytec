@@ -1,6 +1,10 @@
 # SickRage
 ![](https://sickrage.github.io/images/logo.png)
 
+[![Docker Stars](https://img.shields.io/docker/stars/technosoft2000/sickrage-cytec.svg)]()
+[![Docker Pulls](https://img.shields.io/docker/pulls/technosoft2000/sickrage-cytec.svg)]()
+[![](https://imagelayers.io/badge/technosoft2000/sickrage-cytec:latest.svg)](https://imagelayers.io/?images=technosoft2000/sickrage-cytec:latest)
+
 SickRage is an automatic Video Library Manager for TV Shows.
 It watches for new episodes of your favorite shows, and when they are posted it does its magic: automatic torrent/nzb searching, downloading, and processing at the qualities you want.
 
@@ -133,7 +137,6 @@ chown -R docker:docker sickrage
 * get your Docker User ID and Group ID of your previously created user and group
 ```
 id docker
-
 uid=1029(docker) gid=100(users) groups=100(users),65539(docker)
 ```
 
@@ -159,7 +162,6 @@ technosoft2000/sickrage-cytec
 * check if the Docker container was created successfully
 ```
 docker ps -a
-
 CONTAINER ID        IMAGE                           COMMAND                CREATED             STATUS              PORTS               NAMES
 0b33c177b6ae        technosoft2000/sickrage-cytec   "/sickrage/start.sh"   8 seconds ago       Created 
 ```
@@ -172,7 +174,6 @@ docker start sickrage-cytec
 * analyze the log (stop it with CTRL+C)
 ```
 docker logs -f sickrage-cytec
-
 Adding group 'sickrage' (GID 65539) ...
 Done.
 Adding user 'sickrage' ...
