@@ -117,6 +117,16 @@ Login into the DSM Web Management
 * Control _Panel_ > _Privilege_ > _User_ and create a new on with name 'docker' and assign this user to the group 'docker'
 
 Connect with SSH to your NAS
+* after sucessful connection change to the root account via
+```
+sudo -i
+```
+or
+```
+sudo su -
+```
+for the password use the same one which was used for the SSH authentication.
+
 * create a 'docker' directory on your volume (if such doesn't exist)
 ```
 mkdir -p /volume1/docker/
@@ -125,7 +135,7 @@ chown root:root /volume1/docker/
 
 * create a 'sickrage' directory
 ```
-cd /volume1/docker#
+cd /volume1/docker
 mkdir apps
 chown docker:docker apps
 cd apps
