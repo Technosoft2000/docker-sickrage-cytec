@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 # Set the timezone.
 if [ "$SET_CONTAINER_TIMEZONE" = "true" ]; then

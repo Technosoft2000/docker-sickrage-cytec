@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 PUID=${PUID:=15000}
 PUSER=${PUSER:=sickrage}
