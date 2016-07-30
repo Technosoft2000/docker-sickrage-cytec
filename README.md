@@ -23,6 +23,8 @@ docker create --name=sickrage-cytec \
 -v <tv series directory>:/volume1/video \
 [-v <path to certificates>:/volume1/certificates \]
 [-v /etc/localtime:/etc/localtime:ro \]
+[-e SR_REPO=https://github.com/cytec/SickRage.git \]
+[-e SR_BRANCH=master \]
 [-e SET_CONTAINER_TIMEZONE=true \]
 [-e CONTAINER_TIMEZONE=<container timezone value> \]
 [-e PGID=<group ID (gid)> -e PUID=<user ID (uid)> \]
@@ -71,6 +73,8 @@ docker start sickrage-cytec
 * `-v /volume1/video` - the target folder where the tv series will be placed
 * `-v /volume1/certificates` - the target folder of the SSL/TLS certificate files
 * `-v /etc/localhost` - for timesync - __optional__
+* `-e SR_REPO` - set it to the SickRage GitHub repository; by default it uses https://github.com/cytec/SickRage.git - __optional__
+* `-e SR_BRANCH` - set which SickRage GitHub repository branch you want to use, __master__ (default branch) or __develop__ - __optional__
 * `-e SET_CONTAINER_TIMEZONE` - set it to `true` if the specified `CONTAINER_TIMEZONE` should be used - __optional__ 
 * `-e CONTAINER_TIMEZONE` - container timezone as found under the directory `/usr/share/zoneinfo/` - __optional__
 * `-e PGID` for GroupID - see below for explanation - __optional__
