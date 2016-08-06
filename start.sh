@@ -17,5 +17,5 @@ if [ -z "$ADVANCED_DISABLEUPDATES" ]; then
 fi
 
 # run SickRage
-gosu $PUSER:$PGROUP bash -c "/usr/bin/python $SR_HOME/app/SickBeard.py --nolaunch --datadir $SR_HOME/data --config $SR_HOME/config/sickbeard.ini"
+gosu $PUSER:$PGROUP bash -c "/usr/bin/python $SR_HOME/app/SickBeard.py --quiet --nolaunch --datadir $SR_HOME/data --config $SR_HOME/config/sickbeard.ini"
 
