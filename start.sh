@@ -8,6 +8,7 @@ chown $PUSER:$PGROUP -R $SR_HOME
 
 # download the latest version of the SickRage-cytec release
 # see at https://github.com/cytec/SickRage
+echo "Checkout the latest SickRage version ..."
 [[ ! -d $SR_HOME/app/.git ]] && gosu $PUSER:$PGROUP bash -c "git clone -b $SR_BRANCH $SR_REPO $SR_HOME/app"
 
 # opt out for autoupdates using env variable
@@ -17,5 +18,5 @@ if [ -z "$ADVANCED_DISABLEUPDATES" ]; then
 fi
 
 # run SickRage
+echo "Launching SickRage ..."
 gosu $PUSER:$PGROUP bash -c "/usr/bin/python $SR_HOME/app/SickBeard.py --quiet --nolaunch --datadir $SR_HOME/data --config $SR_HOME/config/sickbeard.ini"
-

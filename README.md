@@ -16,7 +16,7 @@ It watches for new episodes of your favorite shows, and when they are posted it 
 
 __Create the container:__
 ```
-docker create --name=sickrage-cytec \
+docker create --name=sickrage-cytec --restart=always \
 -v <config directory>:/sickrage/config \
 -v <data directory>:/sickrage/data \
 -v <tv downloads directory>:/volume1/downloads \
@@ -34,7 +34,7 @@ technosoft2000/sickrage-cytec
 
 __Example:__
 ```
-docker create --name=sickrage-cytec \
+docker create --name=sickrage-cytec --restart=always \
 -v /opt/docker/sickrage/config:/sickrage/config \
 -v /opt/docker/sickrage/data:/sickrage/data \
 -v /volume1/downloads:/volume1/downloads \
@@ -48,7 +48,7 @@ technosoft2000/sickrage-cytec
 *or*
 
 ```
-docker create --name=sickrage-cytec \
+docker create --name=sickrage-cytec --restart=always \
 -v /opt/docker/sickrage/config:/sickrage/config \
 -v /opt/docker/sickrage/data:/sickrage/data \
 -v /volume1/downloads:/volume1/downloads \
@@ -161,7 +161,7 @@ docker pull technosoft2000/sickrage-cytec
 
 * create a Docker container (take care regarding the user ID and group ID, change timezone and port as needed)
 ```
-docker create --name=sickrage-cytec \
+docker create --name=sickrage-cytec --restart=always \
 -v /volume1/docker/apps/sickrage/config:/sickrage/config \
 -v /volume1/docker/apps/sickrage/data:/sickrage/data \
 -v /volume1/downloads:/volume1/downloads \
@@ -188,25 +188,10 @@ docker start sickrage-cytec
 * analyze the log (stop it with CTRL+C)
 ```
 docker logs -f sickrage-cytec
-Adding group 'sickrage' (GID 65539) ...
-Done.
-Adding user 'sickrage' ...
-Adding new user 'sickrage' (1029) with group 'sickrage' ...
-Not creating home directory `/home/sickrage'.
-Current default time zone: 'Europe/Berlin'
-Local time is now:      Mon May 16 13:56:18 CEST 2016.
-Universal Time is now:  Mon May 16 11:56:18 UTC 2016.
-Container timezone set to: Europe/Berlin
-Klone nach '/sickrage/app' ...
+Sun Aug  7 18:42:03 CEST 2016
+Container timezone set to: Europe/Vienna
+Checkout the latest SickRage version ...
+Cloning into '/sickrage/app'...
 Already up-to-date.
-21:31:04 INFO::MAIN :: Checking for shows with tvrage id's, since tvrage is gone
-21:31:04 INFO::MAIN :: New API generated
-21:31:04 INFO::TORNADO :: Starting SickRage on http://0.0.0.0:8081/
-21:31:04 INFO::MAIN :: Checking for scene exception updates for theTVDB
-21:31:04 WARNING::MAIN :: Check scene exceptions update failed. Unable to update from: http://sickragetv.github.io/sb_tvdb_scene_excepti
-ons/exceptions.txt
-21:31:04 INFO::MAIN :: Checking for XEM scene exception updates for theTVDB
-21:31:05 INFO::MAIN :: Checking for scene exception updates for AniDB
-21:31:05 INFO::MAIN :: Building internal name cache for all shows
-21:31:05 INFO::MAIN :: Updating timezone info with new one: zoneinfo-2015g.tar.gz
+Launching SickRage ...
 ```
