@@ -3,7 +3,8 @@
 
 [![Docker Stars](https://img.shields.io/docker/stars/technosoft2000/sickrage-cytec.svg)]()
 [![Docker Pulls](https://img.shields.io/docker/pulls/technosoft2000/sickrage-cytec.svg)]()
-[![](https://imagelayers.io/badge/technosoft2000/sickrage-cytec:latest.svg)](https://imagelayers.io/?images=technosoft2000/sickrage-cytec:latest)
+[![](https://images.microbadger.com/badges/image/technosoft2000/sickrage-cytec.svg)](http://microbadger.com/images/technosoft2000/sickrage-cytec "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/technosoft2000/sickrage-cytec.svg)](http://microbadger.com/images/technosoft2000/sickrage-cytec "Get your own version badge on microbadger.com")
 
 SickRage is an automatic Video Library Manager for TV Shows.
 It watches for new episodes of your favorite shows, and when they are posted it does its magic: automatic torrent/nzb searching, downloading, and processing at the qualities you want.
