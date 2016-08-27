@@ -88,6 +88,7 @@ RUN \
 WORKDIR $SR_HOME/app
 
 #start.sh will download the latest version of SickRage and run it.
+COPY *.txt $SR_HOME/
 COPY *.sh $SR_HOME/
 RUN chmod u+x $SR_HOME/start.sh
 
