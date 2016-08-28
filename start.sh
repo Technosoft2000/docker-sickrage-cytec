@@ -7,6 +7,7 @@ cat $SR_HOME/info.txt
 source $SR_HOME/config.sh
 
 #chown the SickRage directory by the new user
+echo "[INFO] Change the ownership of $SR_HOME (including subfolders) to $PUSER:$PGROUP"
 chown $PUSER:$PGROUP -R $SR_HOME
 
 # download the latest version of the SickRage-cytec release
