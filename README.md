@@ -229,6 +229,8 @@ docker start sickrage-cytec
 
 * analyze the log (stop it with CTRL+C)
 ```
+docker logs -f sickrage-cytec
+
         ,----,                                   
       ,/   .`|                                   
     ,`   .'  : .--.--.        ,----,        ,-.  
