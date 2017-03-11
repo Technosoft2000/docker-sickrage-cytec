@@ -1,102 +1,85 @@
-FROM alpine:3.4
+FROM technosoft2000/alpine-base:3.5-1.0.0
 MAINTAINER Technosoft2000 <technosoft2000@gmx.net> 
+LABEL image.version="1.1.0" \
+      image.description="Docker image for SickRage, based on docker image of Alpine" \
+      image.date="2017-03-11" \
+      url.docker="https://hub.docker.com/r/technosoft2000/sickrage-cytec" \
+      url.github="https://github.com/Technosoft2000/docker-sickrage-cytec" \
+      url.support="https://cytec.us/forum"
 
 # Set basic environment settings
 
 ENV \
-    # - TERM: The name of a terminal information file from /lib/terminfo, 
-    # this file instructs terminal programs how to achieve things such as displaying color.
-    TERM="xterm" \
-
-    # - LANG, LANGUAGE, LC_ALL: language dependent settings (Default: de_DE.UTF-8)
-    LANG="de_DE.UTF-8" \
-    LANGUAGE="de_DE:de" \
-    LC_ALL="de_DE.UTF-8" \
-
-    # - PKG_*: the needed applications for installation
-    GOSU_VERSION="1.9" \
-    PKG_BASE="bash tzdata git" \
-    PKG_DEV="make gcc g++ python-dev openssl-dev libffi-dev" \
-    PKG_PYTHON="ca-certificates py-pip python py-libxml2 py-lxml" \
-    PKG_COMPRESS="unrar" \
+    # - VERSION: the docker image version (corresponds to the above LABEL image.version)
+    VERSION="1.1.0" \
     
-    # - SET_CONTAINER_TIMEZONE: set this environment variable to true to set timezone on container startup
-    SET_CONTAINER_TIMEZONE="false" \
+    # - PUSER, PGROUP: the APP user and group name
+    PUSER="sickrage" \
+	PGROUP="sickrage" \
 
-    # - CONTAINER_TIMEZONE: UTC, Default container timezone as found under the directory /usr/share/zoneinfo/
-    CONTAINER_TIMEZONE="UTC" \
+    # - APP_NAME: the APP name
+    APP_NAME="SickRage-Cytec" \
 
-    # - SR_HOME: SickRage Home directory
-    SR_HOME="/sickrage" \
+    # - APP_HOME: the APP home directory
+    APP_HOME="/sickrage" \
 
-    # - SR_REPO, SR_BRANCH: SickRage GitHub repository and related branch
-    SR_REPO="https://github.com/cytec/SickRage.git" \
-    SR_BRANCH="master" \
+    # - APP_REPO, APP_BRANCH: the APP GitHub repository and related branch
+    # for related branch or tag use e.g. master, develop, ...
+    APP_REPO="https://github.com/cytec/SickRage.git" \
+    APP_BRANCH="master" \
 
     # - SYNO_VOLUME: Snyology NAS volume main directory
-    SYNO_VOLUME="/volume1"    
-	
+    SYNO_VOLUME="/volume1" \
+
+    # - PKG_*: the needed applications for installation
+    PKG_DEV="make gcc g++ python-dev libressl-dev libffi-dev" \
+    PKG_PYTHON="ca-certificates py-pip python py-libxml2 py-lxml" \
+    PKG_COMPRESS="unrar"
+
 RUN \
+    # create temporary directories
+    mkdir -p /tmp && \
+    mkdir -p /var/cache/apk && \
+
     # update the package list
     apk -U upgrade && \
 
-    # install gosu from https://github.com/tianon/gosu
-    set -x \
-    && apk add --no-cache --virtual .gosu-deps \
-        dpkg \
-        gnupg \
-        openssl \
-    && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
-    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
-    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
-    && chmod +x /usr/local/bin/gosu \
-    && gosu nobody true \
-    && apk del .gosu-deps \
-    && \
-
     # install the needed applications
-    apk -U add --no-cache $PKG_BASE $PKG_DEV $PKG_PYTHON $PKG_COMPRESS && \
+    apk -U add --no-cache $PKG_DEV $PKG_PYTHON $PKG_COMPRESS && \
 
     # install additional python packages:
     # setuptools, pyopenssl, cheetah, requirements 
+    pip --no-cache-dir install --upgrade pip && \
     pip --no-cache-dir install --upgrade setuptools && \
-    pip --no-cache-dir install --upgrade pyopenssl cheetah requirements && \
+    pip --no-cache-dir install --upgrade pyopenssl cheetah requirements requests && \
 
     # remove not needed packages
     apk del $PKG_DEV && \
 
     # create Snyology NAS /volume1 folders 
-    # to easily provide the same corresponding host directories at SickRage
+    # to easily provide the same corresponding host directories at the APP
     mkdir -p $SYNO_VOLUME/downloads && \
     mkdir -p $SYNO_VOLUME/video && \
     mkdir -p $SYNO_VOLUME/certificates && \
 
-    # create SickRage folder structure
-    mkdir -p $SR_HOME/app && \
-    mkdir -p $SR_HOME/config && \
-    mkdir -p $SR_HOME/data && \
+    # create the APP folder structure
+    mkdir -p $APP_HOME/app && \
+    mkdir -p $APP_HOME/config && \
+    mkdir -p $APP_HOME/data && \
 
     # cleanup temporary files
     rm -rf /tmp && \
     rm -rf /var/cache/apk/*
 
-# set the working directory for SickRage
-WORKDIR $SR_HOME/app
+# set the working directory for the APP
+WORKDIR $APP_HOME/app
 
-#start.sh will download the latest version of SickRage and run it.
-COPY *.txt $SR_HOME/
-COPY *.sh $SR_HOME/
-RUN chmod u+x $SR_HOME/start.sh
+#start.sh will download the latest version of the APP and run it.
+COPY *.txt /init/
+COPY *.sh /init/
 
-# Set volumes for the SickRage folder structure
-VOLUME $SR_HOME/config $SR_HOME/data $SYNO_VOLUME/downloads $SYNO_VOLUME/video $SYNO_VOLUME/certificates
+# Set volumes for the APP folder structure
+VOLUME $APP_HOME/config $APP_HOME/data $SYNO_VOLUME/downloads $SYNO_VOLUME/video $SYNO_VOLUME/certificates
 
 # Expose ports
 EXPOSE 8081
-
-# Start SickRage-cytec
-CMD ["/bin/bash", "-c", "$SR_HOME/start.sh"]

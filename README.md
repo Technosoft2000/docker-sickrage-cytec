@@ -6,12 +6,40 @@
 [![](https://images.microbadger.com/badges/image/technosoft2000/sickrage-cytec.svg)](http://microbadger.com/images/technosoft2000/sickrage-cytec "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/technosoft2000/sickrage-cytec.svg)](http://microbadger.com/images/technosoft2000/sickrage-cytec "Get your own version badge on microbadger.com")
 
+## SickRage - The automated TV Shows download manager ##
+
 SickRage is an automatic Video Library Manager for TV Shows.
 It watches for new episodes of your favorite shows, and when they are posted it does its magic: automatic torrent/nzb searching, downloading, and processing at the qualities you want.
 
-## Modifications on [SickRage](https://sickrage.github.io/) by cytec
-* fixes to detect German releases correctly
-* added special support for German Airdates
+## Updates ##
+
+**2017-03-11 - v1.1.0**
+ * sickrage-cytec image is based now on ```technosoft2000/alpine-base:3.5-1.0.0```
+ * __SR...__ environment variables are changed to __APP...__
+ * it's also possible to use sickrage tags as __APP_BRANCH__ input to checkout a specific tagged version
+ * updated README.md instructions
+
+**2016-08-28 - v1.0.0**
+ * enhanced check regarding timezone
+ * enhanced output at startup of the docker container
+
+**2016-08-27**
+ * enhanced check regarding UID and GID
+ * enhanced output at startup of the docker container
+ * TS2k ASCII Logo :D at startup of the docker container
+
+**2016-08-07**
+ * automatic restart of SickRage can be done via option --restart=always
+ * changed the Docker Image base from Ubuntu 16.04 to Alpine 3.4
+
+## Features ##
+ * running SickRage under its own user (not root)
+ * changing of the UID and GID for the SickRage user
+ * support of SSL / HTTPS encryption via __LibreSSL__
+
+**Modifications on [SickRage](https://sickrage.github.io/) by cytec**
+ * fixes to detect German releases correctly
+ * added special support for German Airdates
 
 ## Usage ##
 
@@ -24,8 +52,8 @@ docker create --name=sickrage-cytec --restart=always \
 -v <tv series directory>:/volume1/video \
 [-v <path to certificates>:/volume1/certificates \]
 [-v /etc/localtime:/etc/localtime:ro \]
-[-e SR_REPO=https://github.com/cytec/SickRage.git \]
-[-e SR_BRANCH=master \]
+[-e APP_REPO=https://github.com/cytec/SickRage.git \]
+[-e APP_BRANCH=master \]
 [-e SET_CONTAINER_TIMEZONE=true \]
 [-e CONTAINER_TIMEZONE=<container timezone value> \]
 [-e PGID=<group ID (gid)> -e PUID=<user ID (uid)> \]
@@ -67,6 +95,15 @@ docker start sickrage-cytec
 ```
 
 ## Parameters ##
+
+### Introduction ###
+The parameters are split into two parts which are separated via colon.
+The left side describes the host and the right side the container. 
+For example a port definition looks like this ```-p external:internal``` and defines the port mapping from internal (the container) to external (the host).
+So ```-p 8080:80``` would expose port __80__ from inside the container to be accessible from the host's IP on port __8080__.
+Accessing http://'host':8080 (e.g. http://192.168.0.10:8080) would then show you what's running **INSIDE** the container on port __80__.
+
+### Details ###
 * `-p 8081` - http port for the web user interface
 * `-v /sickrage/config` - local path for sickrage config files
 * `-v /sickrage/data` - local path for sickrage data files (cache, database, ...)
@@ -74,24 +111,26 @@ docker start sickrage-cytec
 * `-v /volume1/video` - the target folder where the tv series will be placed
 * `-v /volume1/certificates` - the target folder of the SSL/TLS certificate files
 * `-v /etc/localhost` - for timesync - __optional__
-* `-e SR_REPO` - set it to the SickRage GitHub repository; by default it uses https://github.com/cytec/SickRage.git - __optional__
-* `-e SR_BRANCH` - set which SickRage GitHub repository branch you want to use, __master__ (default branch) or __develop__ - __optional__
+* `-e APP_REPO` - set it to the SickRage GitHub repository; by default it uses https://github.com/cytec/SickRage.git - __optional__
+* `-e APP_BRANCH` - set which SickRage GitHub repository branch you want to use, __master__ (default branch) or __develop__ - __optional__
 * `-e SET_CONTAINER_TIMEZONE` - set it to `true` if the specified `CONTAINER_TIMEZONE` should be used - __optional__ 
 * `-e CONTAINER_TIMEZONE` - container timezone as found under the directory `/usr/share/zoneinfo/` - __optional__
 * `-e PGID` for GroupID - see below for explanation - __optional__
 * `-e PUID` for UserID - see below for explanation - __optional__
 
-### Container Timezone
+### Container Timezone ###
 
 In the case of the Synology NAS it is not possible to map `/etc/localtime` for timesync, and for this and similar case
 set `SET_CONTAINER_TIMEZONE` to `true` and specify with `CONTAINER_TIMEZONE` which timezone should be used.
 The possible container timezones can be found under the directory `/usr/share/zoneinfo/`.
+
 Examples:
-* UTC - __this is the default value if no value is set__
-* Europe\Berlin
-* Europe\Vienna
-* America\New_York
-* ...
+
+ * ```UTC``` - __this is the default value if no value is set__
+ * ```Europe/Berlin```
+ * ```Europe/Vienna```
+ * ```America/New_York```
+ * ...
 
 __Don't use the value__ `localtime` because it results into: `failed to access '/etc/localtime': Too many levels of symbolic links`
 
@@ -107,7 +146,9 @@ In this instance PUID=1001 and PGID=1001. To find yours use id user as below:
 
 ## Additional ##
 Shell access whilst the container is running: `docker exec -it sickrage-cytec /bin/bash`
+
 Upgrade to the latest version: `docker restart sickrage-cytec`
+
 To monitor the logs of the container in realtime: `docker logs -f sickrage-cytec`
 
 ---
@@ -188,11 +229,51 @@ docker start sickrage-cytec
 
 * analyze the log (stop it with CTRL+C)
 ```
-docker logs -f sickrage-cytec
-Sun Aug  7 18:42:03 CEST 2016
-Container timezone set to: Europe/Vienna
-Checkout the latest SickRage version ...
+        ,----,                                   
+      ,/   .`|                                   
+    ,`   .'  : .--.--.        ,----,        ,-.  
+  ;    ;     //  /    '.    .'   .' \   ,--/ /|  
+.'___,/    ,'|  :  /`. /  ,----,'    |,--. :/ |  
+|    :     | ;  |  |--`   |    :  .  ;:  : ' /   
+;    |.';  ; |  :  ;_     ;    |.'  / |  '  /    
+`----'  |  |  \  \    `.  `----'/  ;  '  |  :    
+    '   :  ;   `----.   \   /  ;  /   |  |   \   
+    |   |  '   __ \  \  |  ;  /  /-,  '  : |. \  
+    '   :  |  /  /`--'  / /  /  /.`|  |  | ' \ \ 
+    ;   |.'  '--'.     /./__;      :  '  : |--'  
+    '---'      `--'---' |   :    .'   ;  |,'     
+                        ;   | .'      '--'       
+                        `---'                    
+
+      PRESENTS ANOTHER AWESOME DOCKER IMAGE
+      
+      ~~~~~  SickRage Cytec-Edition   ~~~~~
+                                           
+[INFO] Docker image version: 1.1.0
+[INFO] Create group sickrage with id 65539
+[INFO] Create user sickrage with id 1029
+[INFO] Current active timezone is UTC
+Sat Mar 11 14:17:00 CET 2017
+[INFO] Container timezone is changed to: Europe/Vienna
+[INFO] Change the ownership of /sickrage (including subfolders) to sickrage:sickrage
+[INFO] Current git version is:
+git version 2.11.1
+[INFO] Checkout the latest SickRage-Cytec version ...
+[INFO] ... git clone -b develop --single-branch https://github.com/cytec/SickRage.git /sickrage/app -v
 Cloning into '/sickrage/app'...
+POST git-upload-pack (165 bytes)
+[INFO] Autoupdate is active, try to pull the latest sources for SickRage-Cytec ...
+[INFO] ... current git status is
+On branch develop
+Your branch is up-to-date with 'origin/develop'.
+nothing to commit, working tree clean
+106cc31541b53024a49239693c4265af0bda5f1a
+[INFO] ... pulling sources
 Already up-to-date.
-Launching SickRage ...
+[INFO] ... git status after update is
+On branch develop
+Your branch is up-to-date with 'origin/develop'.
+nothing to commit, working tree clean
+106cc31541b53024a49239693c4265af0bda5f1a
+[INFO] Launching SickRage-Cytec ...
 ```
