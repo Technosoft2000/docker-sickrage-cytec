@@ -13,6 +13,11 @@ It watches for new episodes of your favorite shows, and when they are posted it 
 
 ## Updates ##
 
+**2017-06-03 - v1.1.2**
+
+ * upgrade to new base image technosoft2000/alpine-base:3.6-2
+ * supports now PGID < 1000
+
 **2017-05-28 - v1.1.1**
 
  * upgrade to __Alpine 3.6__ (new base image [technosoft2000/alpine-base:3.6-1](https://hub.docker.com/r/technosoft2000/alpine-base/))

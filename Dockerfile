@@ -1,8 +1,8 @@
-FROM technosoft2000/alpine-base:3.6-1
+FROM technosoft2000/alpine-base:3.6-2
 MAINTAINER Technosoft2000 <technosoft2000@gmx.net> 
-LABEL image.version="1.1.1" \
+LABEL image.version="1.1.2" \
       image.description="Docker image for SickRage, based on docker image of Alpine" \
-      image.date="2017-05-28" \
+      image.date="2017-06-03" \
       url.docker="https://hub.docker.com/r/technosoft2000/sickrage-cytec" \
       url.github="https://github.com/Technosoft2000/docker-sickrage-cytec" \
       url.support="https://cytec.us/forum"
@@ -11,7 +11,7 @@ LABEL image.version="1.1.1" \
 
 ENV \
     # - VERSION: the docker image version (corresponds to the above LABEL image.version)
-    VERSION="1.1.1" \
+    VERSION="1.1.2" \
     
     # - PUSER, PGROUP: the APP user and group name
     PUSER="sickrage" \
