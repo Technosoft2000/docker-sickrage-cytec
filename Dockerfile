@@ -1,8 +1,8 @@
 FROM technosoft2000/alpine-base:3.6-2
 MAINTAINER Technosoft2000 <technosoft2000@gmx.net> 
-LABEL image.version="1.1.2" \
+LABEL image.version="1.1.3" \
       image.description="Docker image for SickRage, based on docker image of Alpine" \
-      image.date="2017-06-03" \
+      image.date="2017-06-15" \
       url.docker="https://hub.docker.com/r/technosoft2000/sickrage-cytec" \
       url.github="https://github.com/Technosoft2000/docker-sickrage-cytec" \
       url.support="https://cytec.us/forum"
@@ -11,7 +11,7 @@ LABEL image.version="1.1.2" \
 
 ENV \
     # - VERSION: the docker image version (corresponds to the above LABEL image.version)
-    VERSION="1.1.2" \
+    VERSION="1.1.3" \
     
     # - PUSER, PGROUP: the APP user and group name
     PUSER="sickrage" \
@@ -32,7 +32,8 @@ ENV \
     SYNO_VOLUME="/volume1" \
 
     # - PKG_*: the needed applications for installation
-    PKG_DEV="make gcc g++ python-dev openssl-dev libffi-dev" \
+    PKG_DEV="make gcc g++" \
+    PKG_DEV_KEEP="python-dev openssl-dev libffi-dev" \
     PKG_PYTHON="ca-certificates py-pip python py-libxml2 py-lxml" \
     PKG_COMPRESS="unrar"
 
@@ -45,7 +46,7 @@ RUN \
     apk -U upgrade && \
 
     # install the needed applications
-    apk -U add --no-cache $PKG_DEV $PKG_PYTHON $PKG_COMPRESS && \
+    apk -U add --no-cache $PKG_DEV $PKG_DEV_KEEP $PKG_PYTHON $PKG_COMPRESS && \
 
     # install additional python packages:
     # setuptools, pyopenssl, cheetah, requirements 

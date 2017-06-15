@@ -13,15 +13,13 @@ It watches for new episodes of your favorite shows, and when they are posted it 
 
 ## Updates ##
 
-**2017-06-03 - v1.1.2**
+**2017-06-15 - v1.1.3**
 
- * upgrade to new base image technosoft2000/alpine-base:3.6-2
- * supports now PGID < 1000
+ * Log output on console is activated again; I'll create an environment option if I or somebody else gets an issue with it 
 
-**2017-05-28 - v1.1.1**
-
- * upgrade to __Alpine 3.6__ (new base image [technosoft2000/alpine-base:3.6-1](https://hub.docker.com/r/technosoft2000/alpine-base/))
- * the dependency ```cryptography``` requires the usage of ```openssl-dev``` instead of ```libressl-dev```, nevertheless [LibreSSL](https://www.libressl.org/) is still used at runtime
+ * **___HTTPS___**
+   - Self-signed certificate creation via SickRage is working now, 
+     btw. Chrome warns that this certificate is of course insecure
 
 For previous changes see at [full changelog](CHANGELOG.md).
 
