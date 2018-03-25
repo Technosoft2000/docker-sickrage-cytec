@@ -13,13 +13,9 @@ It watches for new episodes of your favorite shows, and when they are posted it 
 
 ## Updates ##
 
-**2017-06-15 - v1.1.3**
+**2018-03-25 - v1.1.4**
 
- * Log output on console is activated again; I'll create an environment option if I or somebody else gets an issue with it 
-
- * **___HTTPS___**
-   - Self-signed certificate creation via SickRage is working now, 
-     btw. Chrome warns that this certificate is of course insecure
+ * upgrade to latest base image [technosoft2000/alpine-base:3.6-3](https://hub.docker.com/r/technosoft2000/alpine-base/)
 
 For previous changes see at [full changelog](CHANGELOG.md).
 

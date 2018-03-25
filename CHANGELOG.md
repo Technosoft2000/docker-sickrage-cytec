@@ -1,3 +1,7 @@
+**2018-03-25 - v1.1.4**
+
+ * upgrade to latest base image [technosoft2000/alpine-base:3.6-3](https://hub.docker.com/r/technosoft2000/alpine-base/)
+
 **2017-06-15 - v1.1.3**
 
  * Log output on console is activated again; I'll create an environment option if I or somebody else gets an issue with it 
