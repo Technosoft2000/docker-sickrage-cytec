@@ -13,9 +13,9 @@ It watches for new episodes of your favorite shows, and when they are posted it 
 
 ## Updates ##
 
-**2018-03-25 - v1.1.4**
+**2019-02-17 - v1.2.0**
 
- * upgrade to latest base image [technosoft2000/alpine-base:3.6-3](https://hub.docker.com/r/technosoft2000/alpine-base/)
+ * upgrade to latest base image [technosoft2000/alpine-base:3.9-1](https://hub.docker.com/r/technosoft2000/alpine-base/)
 
 For previous changes see at [full changelog](CHANGELOG.md).
 
@@ -219,7 +219,6 @@ docker start sickrage-cytec
 * analyze the log (stop it with CTRL+C)
 ```
 docker logs -f sickrage-cytec
-
         ,----,                                   
       ,/   .`|                                   
     ,`   .'  : .--.--.        ,----,        ,-.  
@@ -235,36 +234,20 @@ docker logs -f sickrage-cytec
     '---'      `--'---' |   :    .'   ;  |,'     
                         ;   | .'      '--'       
                         `---'                    
-
       PRESENTS ANOTHER AWESOME DOCKER IMAGE
-      
       ~~~~~  SickRage Cytec-Edition   ~~~~~
-                                           
-[INFO] Docker image version: 1.1.0
+[INFO] Docker image version: 1.2.0
+[INFO] Alpine Linux version: 3.9.0
 [INFO] Create group sickrage with id 65539
 [INFO] Create user sickrage with id 1029
 [INFO] Current active timezone is UTC
-Sat Mar 11 14:17:00 CET 2017
+Sun Feb 17 15:07:04 CET 2019
 [INFO] Container timezone is changed to: Europe/Vienna
 [INFO] Change the ownership of /sickrage (including subfolders) to sickrage:sickrage
 [INFO] Current git version is:
-git version 2.11.1
+git version 2.20.1
 [INFO] Checkout the latest SickRage-Cytec version ...
 [INFO] ... git clone -b develop --single-branch https://github.com/cytec/SickRage.git /sickrage/app -v
 Cloning into '/sickrage/app'...
-POST git-upload-pack (165 bytes)
-[INFO] Autoupdate is active, try to pull the latest sources for SickRage-Cytec ...
-[INFO] ... current git status is
-On branch develop
-Your branch is up-to-date with 'origin/develop'.
-nothing to commit, working tree clean
-106cc31541b53024a49239693c4265af0bda5f1a
-[INFO] ... pulling sources
-Already up-to-date.
-[INFO] ... git status after update is
-On branch develop
-Your branch is up-to-date with 'origin/develop'.
-nothing to commit, working tree clean
-106cc31541b53024a49239693c4265af0bda5f1a
-[INFO] Launching SickRage-Cytec ...
+POST git-upload-pack (189 bytes)
 ```

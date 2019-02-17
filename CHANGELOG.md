@@ -1,3 +1,7 @@
+**2019-02-17 - v1.2.0**
+
+ * upgrade to latest base image [technosoft2000/alpine-base:3.9-1](https://hub.docker.com/r/technosoft2000/alpine-base/)
+
 **2018-03-25 - v1.1.4**
 
  * upgrade to latest base image [technosoft2000/alpine-base:3.6-3](https://hub.docker.com/r/technosoft2000/alpine-base/)
